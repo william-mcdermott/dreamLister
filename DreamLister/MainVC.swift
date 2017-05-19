@@ -28,12 +28,12 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
-        configureCell(cell: cell, indexPath: indexPath as NSIndexPath)
+        configureCell(cell: cell, indexPath: indexPath)
         return cell
     }
     
-    func configureCell(cell: ItemCell, indexPath: NSIndexPath) {
-        let item = controller.object(at: indexPath as IndexPath)
+    func configureCell(cell: ItemCell, indexPath: IndexPath) {
+        let item = controller.object(at: indexPath)
         cell.configureCell(item: item)
     }
     
@@ -128,18 +128,18 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
             if let indexPath = newIndexPath {
                 tableView.insertRows(at: [indexPath], with: .fade)
             }
-            break
+            
         case.delete:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
-            break
+            
         case.update:
             if let indexPath = indexPath {
                 let cell = tableView.cellForRow(at: indexPath) as! ItemCell
-                configureCell(cell: cell, indexPath: indexPath as NSIndexPath)
+                configureCell(cell: cell, indexPath: indexPath)
             }
-            break
+            
         case.move:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
@@ -147,7 +147,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
             if let indexPath = newIndexPath {
                 tableView.insertRows(at: [indexPath], with: .fade)
             }
-            break
+            
             
         }
     }
